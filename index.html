@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Jue's Lab · Body–Brain Co-Intelligence of Soft Robots</title>
+<meta name="description" content="Jue's Lab at the University of Tennessee, Knoxville — building intelligent, bio-inspired soft robotic systems with embodied AI, physics-informed AI, mechanical intelligence, advanced manufacturing, and flexible electronics." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23000'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%2322d3ee'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#000000;
+    --surface:#0a0b0d;
+    --surface-2:#111317;
+    --line:rgba(255,255,255,0.10);
+    --line-strong:rgba(255,255,255,0.18);
+    --text:#f4f4f5;
+    --muted:#a1a1aa;
+    --muted-2:#71717a;
+    --accent:#22d3ee;
+    --accent-2:#818cf8;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--text);
+    font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{font-family:'Space Grotesk','Inter',sans-serif;line-height:1.12;letter-spacing:-0.02em;margin:0}
+  section{scroll-margin-top:72px}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .accent{color:var(--accent)}
+  .gradient-text{
+    background:linear-gradient(120deg,var(--accent),var(--accent-2));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--accent);
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--accent);opacity:.7}
+  .muted{color:var(--muted)}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;
+    font-weight:600;font-size:14px;transition:.2s ease;border:1px solid transparent;
+  }
+  .btn-primary{background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#04121a}
+  .btn-primary:hover{filter:brightness(1.08);transform:translateY(-1px)}
+  .btn-ghost{border-color:var(--line-strong);color:var(--text)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* NAV */
+  header.nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    background:rgba(0,0,0,0.65);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk';font-weight:700;font-size:18px;letter-spacing:.02em}
+  .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px var(--accent)}
+  .nav-links{display:flex;align-items:center;gap:28px}
+  .nav-links a{font-size:14px;font-weight:500;color:var(--muted);transition:.18s}
+  .nav-links a:hover,.nav-links a.active{color:var(--text)}
+  .nav-cta{margin-left:6px}
+  .hamburger{display:none;background:none;border:0;color:var(--text);cursor:pointer;padding:6px}
+  .hamburger svg{width:26px;height:26px}
+
+  /* HERO */
+  .hero{position:relative;padding:150px 0 96px;overflow:hidden}
+  .hero-glow{
+    position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(620px 420px at 78% 8%,rgba(34,211,238,0.16),transparent 60%),
+      radial-gradient(560px 420px at 8% 30%,rgba(129,140,248,0.13),transparent 60%);
+  }
+  .hero-grid{
+    position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.5;
+    background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);
+    background-size:54px 54px;
+    mask-image:radial-gradient(circle at 50% 0%,#000 30%,transparent 78%);
+    -webkit-mask-image:radial-gradient(circle at 50% 0%,#000 30%,transparent 78%);
+  }
+  .hero .wrap{position:relative;z-index:1}
+  .badge{
+    display:inline-flex;align-items:center;gap:9px;padding:7px 14px;border-radius:999px;
+    border:1px solid var(--line-strong);background:var(--surface);font-size:12.5px;color:var(--muted);margin-bottom:26px;
+  }
+  .badge .pulse{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(34,211,238,.6);animation:pulse 2.2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,211,238,.5)}70%{box-shadow:0 0 0 9px rgba(34,211,238,0)}100%{box-shadow:0 0 0 0 rgba(34,211,238,0)}}
+  .hero h1{font-size:clamp(2.5rem,6vw,4.6rem);font-weight:700}
+  .hero p.lede{max-width:680px;font-size:clamp(1.05rem,2vw,1.22rem);color:var(--muted);margin:26px 0 0}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px}
+
+  /* SECTION */
+  .section{padding:92px 0;border-top:1px solid var(--line)}
+  .section-head{max-width:720px;margin-bottom:48px}
+  .section-head h2{font-size:clamp(1.8rem,3.6vw,2.6rem);font-weight:700;margin-top:14px}
+  .section-head p{color:var(--muted);margin:16px 0 0;font-size:1.02rem}
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:1.4fr .9fr;gap:48px;align-items:start}
+  .about-grid p{color:#d4d4d8;font-size:1.05rem}
+  .about-grid p+p{margin-top:18px}
+  .focus-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px}
+  .focus-card h4{margin:0 0 16px;font-family:'Space Grotesk';font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .chips{display:flex;flex-wrap:wrap;gap:9px}
+  .chip{font-size:13px;padding:7px 13px;border-radius:999px;border:1px solid var(--line-strong);color:#e4e4e7;background:rgba(255,255,255,0.02)}
+
+  /* RESEARCH CARDS */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{
+    background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px;
+    transition:.22s ease;position:relative;overflow:hidden;
+  }
+  .card:hover{border-color:rgba(34,211,238,.55);transform:translateY(-3px);box-shadow:0 18px 50px -28px rgba(34,211,238,.5)}
+  .card .ico{font-size:24px;margin-bottom:14px;display:block}
+  .card h3{font-size:1.15rem;font-weight:600;margin-bottom:9px}
+  .card p{color:var(--muted);font-size:.95rem;margin:0}
+
+  /* SHOWCASE */
+  .showcase{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+  .shot{position:relative;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#000;aspect-ratio:16/10}
+  .shot img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.05)}
+  .shot span{position:absolute;left:0;right:0;bottom:0;padding:18px 14px 10px;font-size:12.5px;color:#e9e9ee;
+    background:linear-gradient(transparent,rgba(0,0,0,.85))}
+  .shot.tall{grid-row:span 1}
+
+  /* PUBLICATIONS */
+  .pub{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid var(--line)}
+  .pub:last-child{border-bottom:0}
+  .pub .yr{font-family:'Space Grotesk';font-weight:600;color:var(--muted-2);min-width:54px;font-size:14px;padding-top:3px}
+  .pub .body h3{font-size:1.05rem;font-weight:600;line-height:1.35}
+  .pub .body .auth{color:var(--muted);font-size:.9rem;margin-top:5px}
+  .pub .venue{display:inline-block;margin-top:9px;font-size:12px;font-weight:600;padding:3px 11px;border-radius:999px;
+    border:1px solid var(--line-strong);color:var(--accent)}
+  .pub .venue.review{color:#fbbf24;border-color:rgba(251,191,36,.4)}
+
+  /* PEOPLE */
+  .people{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .person{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px;text-align:center}
+  .person img{width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 16px;border:2px solid var(--line-strong)}
+  .person h3{font-size:1.15rem;font-weight:600}
+  .person .role{color:var(--accent);font-size:.9rem;margin-top:4px}
+  .person .org{color:var(--muted);font-size:.85rem;margin-top:2px}
+  .person .plinks{display:flex;gap:14px;justify-content:center;margin-top:14px;font-size:13px}
+  .person .plinks a{color:var(--muted)}.person .plinks a:hover{color:var(--accent)}
+  .join-card{
+    background:linear-gradient(135deg,rgba(34,211,238,.08),rgba(129,140,248,.06));
+    border:1px dashed var(--line-strong);border-radius:18px;padding:24px;display:flex;flex-direction:column;justify-content:center
+  }
+  .join-card h3{font-size:1.1rem;margin-bottom:8px}
+  .join-card p{color:var(--muted);font-size:.92rem;margin:0 0 14px}
+
+  /* NEWS */
+  .news{max-width:760px}
+  .news-item{display:flex;gap:22px;padding:18px 0;border-bottom:1px solid var(--line)}
+  .news-item:last-child{border-bottom:0}
+  .news-item .date{font-family:'Space Grotesk';font-size:13px;color:var(--accent);min-width:96px;font-weight:600;padding-top:2px}
+  .news-item .txt{color:#d4d4d8;font-size:.98rem}
+
+  /* CONTACT */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}
+  .contact-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:30px}
+  .contact-card .row{display:flex;gap:12px;align-items:center;padding:9px 0;color:var(--muted);font-size:.96rem}
+  .contact-card .row a:hover{color:var(--accent)}
+  .contact-card .k{color:var(--muted-2);min-width:96px;font-size:.82rem;text-transform:uppercase;letter-spacing:.08em}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted-2);font-size:13.5px}
+  .foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+  .foot-inner a:hover{color:var(--accent)}
+
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    .about-grid{grid-template-columns:1fr}
+    .cards,.showcase,.people{grid-template-columns:1fr 1fr}
+    .contact-grid{grid-template-columns:1fr}
+  }
+  @media(max-width:680px){
+    .nav-links{
+      position:fixed;top:64px;left:0;right:0;flex-direction:column;align-items:flex-start;gap:0;
+      background:rgba(0,0,0,.96);border-bottom:1px solid var(--line);padding:8px 24px 20px;
+      transform:translateY(-130%);transition:.28s ease;
+    }
+    .nav-links.open{transform:translateY(0)}
+    .nav-links a{padding:13px 0;width:100%;border-bottom:1px solid var(--line);font-size:15px}
+    .nav-cta{display:none}
+    .hamburger{display:block}
+    .cards,.showcase,.people{grid-template-columns:1fr}
+    .news-item{flex-direction:column;gap:4px}
+    .news-item .date{min-width:auto}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top"><span class="dot"></span>JUE'S&nbsp;LAB</a>
+    <nav class="nav-links" id="navlinks">
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#people">People</a>
+      <a href="#news">News</a>
+      <a href="#join">Join</a>
+      <a href="#contact">Contact</a>
+      <a class="btn btn-primary nav-cta" href="#join">Join the lab</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-glow"></div>
+  <div class="hero-grid"></div>
+  <div class="wrap">
+    <div class="badge"><span class="pulse"></span>Launching Jan 2027 · Mechanical &amp; Aerospace Engineering · University of Tennessee, Knoxville</div>
+    <h1>Building soft robots with<br><span class="gradient-text">body–brain co-intelligence</span></h1>
+    <p class="lede">Jue's Lab designs intelligent, bio-inspired soft robotic systems — where the body actively morphs, senses, and adapts through smart structures and integrated electronics, and the brain learns, controls, and decides through AI by leveraging the intelligence of the body.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#join">Join the lab →</a>
+      <a class="btn btn-ghost" href="#research">Explore research</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">About the lab</span>
+      <h2>Co-intelligence at both the body and brain levels</h2>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>Our lab focuses on building intelligent, bio-inspired soft robotic systems by combining <strong>embodied AI</strong>, <strong>physics-informed AI</strong>, <strong>mechanical intelligence</strong>, <strong>advanced manufacturing</strong>, and <strong>flexible electronics</strong>.</p>
+        <p>More specifically, we develop soft robots with co-intelligence at both the body and brain levels: the body can actively morph, sense, and adapt through smart structures and integrated electronics, while the brain can learn, control, and make decisions through AI by leveraging the intelligence of the body.</p>
+        <p>The lab is part of the University of Tennessee, Knoxville's <strong>Foundational AI Cluster</strong>, and looks forward to new collaborations across robotics, AI, manufacturing, and bio-inspired systems.</p>
+      </div>
+      <div class="focus-card">
+        <h4>Focus Areas</h4>
+        <div class="chips">
+          <span class="chip">Soft Robotics</span>
+          <span class="chip">Embodied AI</span>
+          <span class="chip">Physics-Informed AI</span>
+          <span class="chip">Shape Morphing</span>
+          <span class="chip">Mechanical Intelligence</span>
+          <span class="chip">Advanced Manufacturing</span>
+          <span class="chip">Flexible Electronics</span>
+          <span class="chip">Bio-Inspired Robots</span>
+          <span class="chip">Amphibious Locomotion</span>
+          <span class="chip">Wearable Sensing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section class="section" id="research">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Research</span>
+      <h2>Where intelligent bodies meet learning brains</h2>
+      <p>We pursue soft robots whose physical bodies and AI brains co-evolve — spanning materials, manufacturing, electronics, modeling, and learning.</p>
+    </div>
+    <div class="cards">
+      <div class="card"><span class="ico">🧠</span><h3>Embodied AI for Soft Robots</h3><p>Reinforcement learning and control that exploit body dynamics for agile, robust locomotion and manipulation.</p></div>
+      <div class="card"><span class="ico">⚛️</span><h3>Physics-Informed AI</h3><p>Sim-to-real and surrogate models grounded in mechanics for data-efficient, generalizable control.</p></div>
+      <div class="card"><span class="ico">🦾</span><h3>Mechanical Intelligence</h3><p>Smart structures that compute, sense, and adapt — offloading intelligence into the body itself.</p></div>
+      <div class="card"><span class="ico">🌀</span><h3>Programmable Shape Morphing</h3><p>Array-based actuators and machine learning for universal, controllable 3D shape transformation.</p></div>
+      <div class="card"><span class="ico">🖨️</span><h3>Advanced Manufacturing</h3><p>3D printing and direct-ink-writing of multifunctional soft actuators, sensors, and electronics.</p></div>
+      <div class="card"><span class="ico">🔌</span><h3>Flexible Electronics &amp; Sensing</h3><p>Integrated, fabric-embedded sensing and actuation for adaptive, wearable, and bio-integrated systems.</p></div>
+    </div>
+
+    <div class="showcase">
+      <div class="shot"><img loading="lazy" src="assets/media/r-turtle.gif" alt="Amphibious robotic turtle"><span>Amphibious robotic turtle — learned locomotion (RL + sim2real)</span></div>
+      <div class="shot"><img loading="lazy" src="assets/media/r-isuit.gif" alt="Fabric wearable motion capture"><span>Calibration-free fabric wearable motion capture</span></div>
+      <div class="shot"><img loading="lazy" src="assets/media/r-morph1.gif" alt="Programmable shape morphing"><span>Programmable shape-morphing surfaces</span></div>
+      <div class="shot"><img loading="lazy" src="assets/media/r-morph2.gif" alt="Machine-learning controlled morphing"><span>Machine-learning–controlled morphing</span></div>
+      <div class="shot"><img loading="lazy" src="assets/media/r-morph3.gif" alt="Universal 3D shape morphing"><span>Universal 3D shape-morphing robots</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section class="section" id="publications">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Publications</span>
+      <h2>Selected publications</h2>
+      <p>A selection of recent work. See the <a class="accent" href="https://scholar.google.com/citations?user=06evsxkAAAAJ&hl=en">full list on Google Scholar</a>.</p>
+    </div>
+
+    <div class="pub"><div class="yr">2025</div><div class="body">
+      <h3>Surrogate Compliance Modeling Enables Reinforcement Learned Locomotion Gaits for Soft Robots</h3>
+      <div class="auth">J. Wang, M. Jiang, L. Ramirez, B. Yang, M. Zhang, E. Figueroa, R. Kramer-Bottiglio</div>
+      <span class="venue review">Science Robotics · under review</span></div></div>
+
+    <div class="pub"><div class="yr">2025</div><div class="body">
+      <h3>Calibration-free Fabric Wearable Motion Capture Across Users and Body Scales</h3>
+      <div class="auth">R. Omar, J. Wang, T. Nguyen, et al., R. Kramer-Bottiglio</div>
+      <span class="venue review">Nature Sensors · under review</span></div></div>
+
+    <div class="pub"><div class="yr">2024</div><div class="body">
+      <h3>Performance Metrics for Shape-Morphing Devices</h3>
+      <div class="auth">J. Wang, A. Chortos</div>
+      <span class="venue">Nature Reviews Materials</span></div></div>
+
+    <div class="pub"><div class="yr">2025</div><div class="body">
+      <h3>Hybrid 3D Printing of Bio-inspired Artificial Slowly Adapting Type II Afferents</h3>
+      <div class="auth">M. Lee, M. Sotzing, J. Wang, A. Chortos</div>
+      <span class="venue">Nature Communications</span></div></div>
+
+    <div class="pub"><div class="yr">2023</div><div class="body">
+      <h3>Passively Addressed Robotic Morphing Surface (PARMS) Based on Machine Learning</h3>
+      <div class="auth">J. Wang, M. Sotzing, M. Lee, A. Chortos</div>
+      <span class="venue">Science Advances</span></div></div>
+
+    <div class="pub"><div class="yr">2025</div><div class="body">
+      <h3>Harnessing Deep Learning of Point Clouds for Morphology Mimicking of Universal 3D Shape-Morphing Robots</h3>
+      <div class="auth">J. Wang, D. Sarkar, J. Suo, A. Chortos</div>
+      <span class="venue">Advanced Intelligent Systems</span></div></div>
+
+    <div class="pub"><div class="yr">2023</div><div class="body">
+      <h3>Bioinspired Rigid-Soft Hybrid Origami Actuator with Controllable Versatile Motion and Variable Stiffness</h3>
+      <div class="auth">Z. Zhang, G. Chen, J. Wang, et al., J. Angeles</div>
+      <span class="venue">IEEE Transactions on Robotics</span></div></div>
+
+    <div class="pub"><div class="yr">2021</div><div class="body">
+      <h3>Fully Controllable and Continuous Programmable Surface Based on Machine Learning</h3>
+      <div class="auth">J. Wang, J. Suo, A. Chortos</div>
+      <span class="venue">IEEE Robotics and Automation Letters</span></div></div>
+  </div>
+</section>
+
+<!-- PEOPLE -->
+<section class="section" id="people">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">People</span>
+      <h2>The team</h2>
+      <p>The lab is just getting started — and we're growing. Come build it with us.</p>
+    </div>
+    <div class="people">
+      <div class="person">
+        <img src="assets/img/profile.jpg" alt="Jue Wang" />
+        <h3>Jue Wang</h3>
+        <div class="role">Principal Investigator</div>
+        <div class="org">Incoming Assistant Professor, MAE · UT Knoxville</div>
+        <div class="plinks">
+          <a href="https://wang5056.github.io/">Website</a>
+          <a href="https://scholar.google.com/citations?user=06evsxkAAAAJ&hl=en">Scholar</a>
+          <a href="https://www.linkedin.com/in/jue-wang-yale/">LinkedIn</a>
+        </div>
+      </div>
+      <div class="join-card">
+        <h3>PhD Students</h3>
+        <p>Fully-funded PhD positions starting 2027. Backgrounds in robotics, ML, ME, EE, or materials are all welcome.</p>
+        <a class="btn btn-ghost" href="#join">Apply →</a>
+      </div>
+      <div class="join-card">
+        <h3>MS · Undergrad · Visitors</h3>
+        <p>Motivated master's and undergraduate researchers, and visiting scholars, are welcome to reach out.</p>
+        <a class="btn btn-ghost" href="#join">Get in touch →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section class="section" id="news">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">News</span>
+      <h2>Latest</h2>
+    </div>
+    <div class="news">
+      <div class="news-item"><div class="date">Jan 2027</div><div class="txt"><strong>The lab launches</strong> at the University of Tennessee, Knoxville (Dept. of Mechanical &amp; Aerospace Engineering). <a class="accent" href="#join">Recruiting PhD students!</a></div></div>
+      <div class="news-item"><div class="date">2026</div><div class="txt">Jue joins <strong>Princeton University</strong> as a postdoctoral associate (Kramer-Bottiglio Group) before starting at UT Knoxville.</div></div>
+      <div class="news-item"><div class="date">2026</div><div class="txt"><strong>Best Extended Abstract Award</strong>, IEEE-RAS International Conference on Soft Robotics (RoboSoft).</div></div>
+      <div class="news-item"><div class="date">2026</div><div class="txt">Invited talks on <em>"Body–Brain Co-intelligence of Soft Robots"</em> at UT Knoxville, UT Arlington, and UA Birmingham.</div></div>
+      <div class="news-item"><div class="date">2025</div><div class="txt">Work on reinforcement-learned soft-robot locomotion and calibration-free wearable motion capture under review at <strong>Science Robotics</strong> and <strong>Nature Sensors</strong>.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section class="section" id="join">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Join us</span>
+      <h2>Open positions</h2>
+      <p>We are recruiting curious, driven people excited about soft robotics, embodied / physics-informed AI, and bio-inspired systems.</p>
+    </div>
+    <div class="cards">
+      <div class="card"><span class="ico">🎓</span><h3>Prospective PhD Students</h3><p>Fully-funded positions starting 2027. Email your CV, a short statement of interest, and (if available) transcripts.</p></div>
+      <div class="card"><span class="ico">🔬</span><h3>MS &amp; Undergraduates</h3><p>Hands-on research in robotics, manufacturing, electronics, and AI. Reach out with your interests.</p></div>
+      <div class="card"><span class="ico">🤝</span><h3>Postdocs &amp; Collaborators</h3><p>Interested in collaborating or joining as a postdoc? Let's talk.</p></div>
+    </div>
+    <p class="muted" style="margin-top:28px">To apply or inquire, email <a class="accent" href="mailto:jue.wang.jw3254@yale.edu">jue.wang.jw3254@yale.edu</a> with the subject line <em>"Joining Jue's Lab"</em>.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Contact</span>
+      <h2>Get in touch</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="row"><span class="k">Email</span><a href="mailto:jue.wang.jw3254@yale.edu">jue.wang.jw3254@yale.edu</a></div>
+        <div class="row"><span class="k">Dept.</span><span>Mechanical &amp; Aerospace Engineering</span></div>
+        <div class="row"><span class="k">Univ.</span><span>University of Tennessee, Knoxville</span></div>
+        <div class="row"><span class="k">From</span><span>January 2027</span></div>
+      </div>
+      <div class="contact-card">
+        <div class="row"><span class="k">Scholar</span><a href="https://scholar.google.com/citations?user=06evsxkAAAAJ&hl=en">Google Scholar</a></div>
+        <div class="row"><span class="k">LinkedIn</span><a href="https://www.linkedin.com/in/jue-wang-yale/">/in/jue-wang-yale</a></div>
+        <div class="row"><span class="k">GitHub</span><a href="https://github.com/wang5056">@wang5056</a></div>
+        <div class="row"><span class="k">Personal</span><a href="https://wang5056.github.io/">wang5056.github.io</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div>© <span id="yr">2026</span> Jue's Lab · University of Tennessee, Knoxville</div>
+    <div><a href="https://wang5056.github.io/">Personal site</a> &nbsp;·&nbsp; <a href="#top">Back to top ↑</a></div>
+  </div>
+</footer>
+
+<script>
+  // mobile menu
+  var ham=document.getElementById('hamburger'),links=document.getElementById('navlinks');
+  ham.addEventListener('click',function(){links.classList.toggle('open')});
+  links.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){links.classList.remove('open')})});
+  // active section highlight
+  var secs=document.querySelectorAll('section[id]'),nav=document.querySelectorAll('.nav-links a[href^="#"]');
+  var obs=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){var id=e.target.getAttribute('id');
+      nav.forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+id)});}
+  })},{rootMargin:'-45% 0px -50% 0px'});
+  secs.forEach(function(s){obs.observe(s)});
+</script>
+</body>
+</html>
