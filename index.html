@@ -122,10 +122,17 @@
   .card h3{font-size:1.15rem;font-weight:600;margin-bottom:9px}
   .card p{color:var(--muted);font-size:.95rem;margin:0}
 
+  /* FEATURED PROJECT */
+  .featured{margin-top:56px;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:32px}
+  .featured h3.ft{font-size:clamp(1.3rem,2.6vw,1.75rem);font-weight:700;margin:12px 0 10px}
+  .featured p.fl{color:var(--muted);margin:0 0 24px;max-width:780px}
+  .featured .cards .card{background:var(--surface-2)}
+  .featured .stage{font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:10px}
+
   /* SHOWCASE */
   .showcase{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
   .shot{position:relative;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#000;aspect-ratio:16/10}
-  .shot img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.05)}
+  .shot img,.shot video{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.05)}
   .shot span{position:absolute;left:0;right:0;bottom:0;padding:18px 14px 10px;font-size:12.5px;color:#e9e9ee;
     background:linear-gradient(transparent,rgba(0,0,0,.85))}
   .shot.tall{grid-row:span 1}
@@ -141,7 +148,7 @@
   .pub .venue.review{color:#fbbf24;border-color:rgba(251,191,36,.4)}
 
   /* PEOPLE */
-  .people{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .people{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
   .person{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px;text-align:center}
   .person img{width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 16px;border:2px solid var(--line-strong)}
   .person h3{font-size:1.15rem;font-weight:600}
@@ -223,7 +230,7 @@
   <div class="hero-glow"></div>
   <div class="hero-grid"></div>
   <div class="wrap">
-    <div class="badge"><span class="pulse"></span>Launching Jan 2027 · Mechanical &amp; Aerospace Engineering · University of Tennessee, Knoxville</div>
+    <div class="badge"><span class="pulse"></span>Launching Jan 2027 · Mechanical &amp; Aerospace Engineering · University of Tennessee, Knoxville · Recruiting PhD students &amp; postdocs</div>
     <h1>Building soft robots with<br><span class="gradient-text">body–brain co-intelligence</span></h1>
     <p class="lede">Jue's Lab designs intelligent, bio-inspired soft robotic systems — where the body actively morphs, senses, and adapts through smart structures and integrated electronics, and the brain learns, controls, and decides through AI by leveraging the intelligence of the body.</p>
     <div class="hero-actions">
@@ -282,7 +289,22 @@
       <div class="card"><span class="ico">🔌</span><h3>Flexible Electronics &amp; Sensing</h3><p>Integrated, fabric-embedded sensing and actuation for adaptive, wearable, and bio-integrated systems.</p></div>
     </div>
 
+    <div class="featured">
+      <span class="eyebrow">Current project</span>
+      <h3 class="ft">Full-envelope amphibious locomotion with a morphing robotic turtle</h3>
+      <p class="fl">LUART (Learning Untethered Amphibious Robotic Turtle) actively morphs its limbs between inflated, stiff legs for walking and deflated, flat flippers for swimming, so a single robot can move on land, in water, and across the transition between them.</p>
+      <div class="cards">
+        <div class="card"><span class="stage">01 · On land</span><h3>Softness surrogates in rigid simulation</h3><p>Effective leg length and friction encode soft limbs in a rigid-body simulator, and body-height control compensates for softness, giving agile, adaptive gaits with real-time cost-of-transport (COT) monitoring.</p></div>
+        <div class="card"><span class="stage">02 · In water</span><h3>Deep, agile, learned swimming</h3><p>Pressure-regulated waterproof hardware works from the surface to 10&nbsp;m depth. Gaits are learned with reinforcement learning from hand-designed seed gaits, moving toward full 3D attitude and speed control.</p></div>
+        <div class="card"><span class="stage">03 · At the transition</span><h3>Energy-aware morph planning</h3><p>Morph–Energy–Path–Gait (MEPG) planning decides where and when to morph, minimizing the total energy of a route, including the transitions themselves.</p></div>
+      </div>
+    </div>
+
     <div class="showcase">
+      <div class="shot"><video src="assets/media/deep_tank_swimming_4x.mp4" poster="assets/media/deep_tank_swimming_4x.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Robotic turtle swimming in a deep tank"></video><span>Deep-tank swimming (4×)</span></div>
+      <div class="shot"><video src="assets/media/pool_targeting_5x.mp4" poster="assets/media/pool_targeting_5x.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Robotic turtle swimming to a target in a test tank"></video><span>Swimming to a target (5×)</span></div>
+      <div class="shot"><video src="assets/media/swimming_simulation_4x.mp4" poster="assets/media/swimming_simulation_4x.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Simulated swimming with pitch control"></video><span>Swimming in simulation — pitch control (4×)</span></div>
+      <div class="shot"><video src="assets/media/land_water_transition_4x.mp4" poster="assets/media/land_water_transition_4x.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Robotic turtle transitioning from water to land"></video><span>Water-to-land transition (4×)</span></div>
       <div class="shot"><img loading="lazy" src="assets/media/r-turtle.gif" alt="Amphibious robotic turtle"><span>Amphibious robotic turtle — learned locomotion (RL + sim2real)</span></div>
       <div class="shot"><img loading="lazy" src="assets/media/r-isuit.gif" alt="Fabric wearable motion capture"><span>Calibration-free fabric wearable motion capture</span></div>
       <div class="shot"><img loading="lazy" src="assets/media/r-morph1.gif" alt="Programmable shape morphing"><span>Programmable shape-morphing surfaces</span></div>
@@ -369,6 +391,11 @@
         <a class="btn btn-ghost" href="#join">Apply →</a>
       </div>
       <div class="join-card">
+        <h3>Postdoctoral Researchers</h3>
+        <p>Postdoc positions are open. We welcome applicants in soft robotics, robot learning, simulation, mechatronics, or materials.</p>
+        <a class="btn btn-ghost" href="#join">Apply →</a>
+      </div>
+      <div class="join-card">
         <h3>MS · Undergrad · Visitors</h3>
         <p>Motivated master's and undergraduate researchers, and visiting scholars, are welcome to reach out.</p>
         <a class="btn btn-ghost" href="#join">Get in touch →</a>
@@ -385,7 +412,8 @@
       <h2>Latest</h2>
     </div>
     <div class="news">
-      <div class="news-item"><div class="date">Jan 2027</div><div class="txt"><strong>The lab launches</strong> at the University of Tennessee, Knoxville (Dept. of Mechanical &amp; Aerospace Engineering). <a class="accent" href="#join">Recruiting PhD students!</a></div></div>
+      <div class="news-item"><div class="date">Jan 2027</div><div class="txt"><strong>The lab launches</strong> at the University of Tennessee, Knoxville (Dept. of Mechanical &amp; Aerospace Engineering). <a class="accent" href="#join">Recruiting PhD students and postdocs!</a></div></div>
+      <div class="news-item"><div class="date">2026</div><div class="txt">Jue is selected as a <strong>NERC 2026 Rising Star</strong> at the Northeast Robotics Colloquium and presents <em>"Full-Envelope Amphibious Locomotion with a Morphing Robotic Turtle."</em></div></div>
       <div class="news-item"><div class="date">2026</div><div class="txt">Jue joins <strong>Princeton University</strong> as a postdoctoral associate (Kramer-Bottiglio Group) before starting at UT Knoxville.</div></div>
       <div class="news-item"><div class="date">2026</div><div class="txt"><strong>Best Extended Abstract Award</strong>, IEEE-RAS International Conference on Soft Robotics (RoboSoft).</div></div>
       <div class="news-item"><div class="date">2026</div><div class="txt">Invited talks on <em>"Body–Brain Co-intelligence of Soft Robots"</em> at UT Knoxville, UT Arlington, and UA Birmingham.</div></div>
@@ -399,13 +427,13 @@
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow">Join us</span>
-      <h2>Open positions</h2>
+      <h2>Open positions: PhD students &amp; postdocs</h2>
       <p>We are recruiting curious, driven people excited about soft robotics, embodied / physics-informed AI, and bio-inspired systems.</p>
     </div>
     <div class="cards">
       <div class="card"><span class="ico">🎓</span><h3>Prospective PhD Students</h3><p>Fully-funded positions starting 2027. Email your CV, a short statement of interest, and (if available) transcripts.</p></div>
       <div class="card"><span class="ico">🔬</span><h3>MS &amp; Undergraduates</h3><p>Hands-on research in robotics, manufacturing, electronics, and AI. Reach out with your interests.</p></div>
-      <div class="card"><span class="ico">🤝</span><h3>Postdocs &amp; Collaborators</h3><p>Interested in collaborating or joining as a postdoc? Let's talk.</p></div>
+      <div class="card"><span class="ico">🤝</span><h3>Postdoctoral Researchers</h3><p>We are hiring postdocs. Email your CV, a short research statement, and the names of 2–3 references. Collaborators are also welcome to get in touch.</p></div>
     </div>
     <p class="muted" style="margin-top:28px">To apply or inquire, email <a class="accent" href="mailto:jw4556@princeton.edu">jw4556@princeton.edu</a> with the subject line <em>"Joining Jue's Lab"</em>.</p>
   </div>
